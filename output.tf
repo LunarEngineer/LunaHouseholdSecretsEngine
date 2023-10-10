@@ -17,32 +17,32 @@ output "pm_api_user" {
   )
 }
 
-output "pm_ssh_public_key" {
-  description = "SSH Key for the server"
+output "fixed_compute_public_key" {
+  description = "SSH Key for the fixed compute layer"
   sensitive   = true
   value       = lookup(
     zipmap(
-        data.bitwarden_item_login.gaia_proxmox_api_credentials.field.*.name,
-        data.bitwarden_item_login.gaia_proxmox_api_credentials.field.*.hidden
+        data.bitwarden_item_login.fixed_compute_ssh_credentials.field.*.name,
+        data.bitwarden_item_login.fixed_compute_ssh_credentials.field.*.hidden
     ),
-    "PM_SSH_PUBLIC_KEY"
+    "ssh_public_key"
   )
 }
 
-output "pm_ssh_private_key" {
-  description = "SSH Key for the server"
+output "fixed_compute_private_key" {
+  description = "SSH Key for the fixed compute layer"
   sensitive   = true
   value       = replace(
     lookup(
       zipmap(
-          data.bitwarden_item_login.gaia_proxmox_api_credentials.field.*.name,
-          data.bitwarden_item_login.gaia_proxmox_api_credentials.field.*.hidden
+          data.bitwarden_item_login.fixed_compute_ssh_credentials.field.*.name,
+          data.bitwarden_item_login.fixed_compute_ssh_credentials.field.*.hidden
       ),
-      "PM_SSH_PRIVATE_KEY"
+      "ssh_private_key"
     ),
     "<N>",  # The secrets engine is dumb and can't represent newlines.
     # It also gets stupid sending newline delimited text.
     # Each newline in the key, therefore, needs the spaces filled with this stupid thing.
-    "\r\n"
+    "\n"
   )
 }
