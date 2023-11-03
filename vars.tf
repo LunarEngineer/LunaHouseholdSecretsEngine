@@ -3,7 +3,7 @@ variable "proxmox_secret_id" {
     type        = string
 }
 
-variable "fixed_compute_ssh_secret_id" {
+variable "fixed_compute_secret_id" {
     description = "The ID of the secret containing ssh info for the fixed compute layer."
     type        = string
 }
