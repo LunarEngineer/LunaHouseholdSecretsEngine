@@ -1,0 +1,3 @@
+[submodule "LunaHouseholdVPC"]
+	path = LunaHouseholdVPC
+	url = git@github.com:LunarEngineer/LunaHouseholdVPC.git
