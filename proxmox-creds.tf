@@ -65,14 +65,14 @@ output "pm_api_token_secret" {
   )
 }
 
+output "ssh_private_key" {
+  description = "terraform private key"
+  sensitive   = true
+  value       = tls_private_key.fixed_compute_provisioning_private_key.private_key_openssh
+}
+
 output "ssh_public_key" {
   description = "terraform public key"
   sensitive   = true
-  value       = lookup(
-    zipmap(
-        data.bitwarden_item_login.gaia_proxmox_api_credentials.field.*.name,
-        data.bitwarden_item_login.gaia_proxmox_api_credentials.field.*.text
-    ),
-    "PM_SSH_PUBLIC_KEY"
-  )
+  value       = tls_public_key.fixed_compute_provisioning_public_key.public_key_ssh
 }
