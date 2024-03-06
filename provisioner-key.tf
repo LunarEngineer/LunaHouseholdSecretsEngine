@@ -20,10 +20,10 @@ resource "bitwarden_item_login" "fixed_compute_temporary_provisioner" {
   username  = "fixed-compute-provisioner@pve"
   field {
     name   = "ssh_private_key"
-    hidden = tls_private_key.fixed_compute_provisioning_private_key.private_key_openssh
+    hidden = resource.tls_private_key.fixed_compute_provisioning_private_key.private_key_openssh
   }
   field {
     name   = "ssh_public_key"
-    hidden = tls_public_key.fixed_compute_provisioning_public_key.public_key_ssh
+    hidden = data.tls_public_key.fixed_compute_provisioning_public_key.public_key_openssh
   }
 }

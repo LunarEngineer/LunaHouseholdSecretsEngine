@@ -13,3 +13,8 @@ To get a secret id:
 `bw list items --search "MyHappySecret" | jq  '.[] .id'`
 
 When accessing a secret you may use the patterns in the examples here which demonstrate how to extract both sensitive (`hidden`), and non-sensitive (`text`), values into output.
+
+## Main Components
+
+* `proxmox-creds.tf`: This establishes the base credentials needed to deploy all the remaining.
+* `provisioner-key.tf`: This is used to publish a keypair into the secrets engine.

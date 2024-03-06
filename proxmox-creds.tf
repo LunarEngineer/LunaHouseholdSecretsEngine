@@ -1,3 +1,16 @@
+#################################
+# Proxmox API credential Inputs #
+#################################
+
+variable "proxmox_secret_id" {
+    description = "The ID of the proxmox credential secret to fetch"
+    type        = string
+}
+
+data "bitwarden_item_login" "gaia_proxmox_api_credentials" {
+  id = var.proxmox_secret_id
+}
+
 ##################################
 # Proxmox API credential Outputs #
 ##################################
@@ -68,11 +81,11 @@ output "pm_api_token_secret" {
 output "ssh_private_key" {
   description = "terraform private key"
   sensitive   = true
-  value       = tls_private_key.fixed_compute_provisioning_private_key.private_key_openssh
+  value       = resource.tls_private_key.fixed_compute_provisioning_private_key.private_key_openssh
 }
 
 output "ssh_public_key" {
   description = "terraform public key"
   sensitive   = true
-  value       = tls_public_key.fixed_compute_provisioning_public_key.public_key_ssh
+  value       = data.tls_public_key.fixed_compute_provisioning_public_key.public_key_openssh
 }
